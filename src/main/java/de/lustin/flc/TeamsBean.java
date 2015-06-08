@@ -1,46 +1,30 @@
 package de.lustin.flc;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
+import javax.inject.Inject;
 
 import de.lustin.flc.domain.Team;
+import de.lustin.flc.service.TeamService;
 
 @ManagedBean(name = "teamsBean")
-@SessionScoped
+@RequestScoped
 public class TeamsBean {
+	
+	private Team createdTeam = new Team("",0,0);
 
-	List<Team> teams = new ArrayList<Team>();
-	Team createdTeam = new Team(); 
+	@Inject
+	private TeamService teamService;
 
 	public List<Team> getTeams() {
-
-//		teams.add(createTeam("Düsseldorf"));
-//		teams.add(createTeam("Köln"));
-//		teams.add(createTeam("Aachen"));
-
-		return teams;
+		return teamService.getAllTeams();
 
 	}
 
-//	private Team createTeam(String name) {
-//		Team t = new Team();
-//		t.setName(name);
-//		t.setPoints(0);
-//		t.setGames(0);
-//		return t;
-//	}
-
-	public Team getNewTeam() {
-		return new Team();
-	}
-	
-	public String Submit() {
-		createdTeam.setPoints(0);
-		createdTeam.setGames(0);
-		teams.add(createdTeam);
+	public String createTeam() {
+		createdTeam = teamService.createTeam(createdTeam);
 		return "teams";
 	}
 
@@ -51,10 +35,4 @@ public class TeamsBean {
 	public void setCreatedTeam(Team createdTeam) {
 		this.createdTeam = createdTeam;
 	}
-	
-	public String createTeam() {
-		createdTeam = new Team();
-		return "createTeam"; 
-	}
-
 }
