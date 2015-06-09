@@ -24,7 +24,7 @@ public class TeamsBean {
 	}
 
 	public String createTeam() {
-		createdTeam = teamService.createTeam(createdTeam);
+		teamService.save(createdTeam);
 		return "teams";
 	}
 

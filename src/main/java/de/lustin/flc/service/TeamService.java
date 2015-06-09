@@ -14,13 +14,6 @@ public class TeamService {
 	@Inject
 	private TeamsStore teamsStore;
 
-	public Team createTeam(Team createdTeam) {
-		createdTeam.setPoints(0);
-		createdTeam.setGames(0);
-
-		return createdTeam;
-	}
-
 	public List<Team> getAllTeams() {
 		return teamsStore.all();
 	}

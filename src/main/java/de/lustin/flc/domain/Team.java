@@ -17,6 +17,9 @@ public class Team {
 
 	private Integer games;
 
+	public Team() {
+	}
+
 	public Team(String name, Integer points, Integer games) {
 		super();
 		this.name = name;
