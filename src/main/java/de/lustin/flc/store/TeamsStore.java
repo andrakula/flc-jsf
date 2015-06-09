@@ -11,7 +11,7 @@ import de.lustin.flc.domain.Team;
 @Stateless
 public class TeamsStore {
 
-	@PersistenceContext
+	@PersistenceContext(unitName = "flc")
 	private EntityManager em;
 
 	public void save(Team t) {
