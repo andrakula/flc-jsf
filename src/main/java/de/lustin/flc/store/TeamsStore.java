@@ -19,6 +19,6 @@ public class TeamsStore {
 	}
 
 	public List<Team> all() {
-		return em.createNamedQuery("all", Team.class).getResultList();
+		return em.createNamedQuery("allTeams", Team.class).getResultList();
 	}
 }

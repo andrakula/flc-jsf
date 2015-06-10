@@ -1,14 +1,12 @@
 package de.lustin.flc.domain;
 
-import java.math.BigInteger;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQuery(name = "all", query = "SELECT t FROM Team t")
+@NamedQuery(name = "allTeams", query = "SELECT t FROM Team t")
 public class Team {
 
 	private String name;
@@ -53,13 +51,13 @@ public class Team {
 
 	@Id
 	@GeneratedValue
-	private BigInteger id;
+	private Long id;
 
-	public BigInteger getId() {
-		return this.id;
+	public Long getId() {
+		return id;
 	}
 
-	public void setId(BigInteger id) {
+	public void setId(Long id) {
 		this.id = id;
-	}
+	}	
 }
