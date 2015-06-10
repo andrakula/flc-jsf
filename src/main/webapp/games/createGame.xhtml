@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Teams</title>
+	<h:outputStylesheet library="css" name="table-style.css" />
+</h:head>
+<h:body bgcolor="white">
+	<h:form>
+		<h:selectOneListbox  id="team1" value="#{gamesBean.createdGame.team1}" converter="#{teamsConverter}">
+			<f:selectItems value="#{teamsBean.teams}" var="y"
+				itemLabel="#{y.name}" itemValue="#{y}" />
+		</h:selectOneListbox>	
+		<h:selectOneListbox id="team2" value="#{gamesBean.createdGame.team2}" converter="#{teamsConverter}">
+			<f:selectItems value="#{teamsBean.teams}" var="y"
+				itemLabel="#{y.name}" itemValue="#{y}" />
+		</h:selectOneListbox>
+
+		<h:inputText id="goals1" value="#{gamesBean.createdGame.goals1}" />
+		<h:inputText id="goals2" value="#{gamesBean.createdGame.goals2}" />
+		<h:commandButton type="submit" value="Submit"
+			action="#{gamesBean.createGame}" />
+		<h:commandButton value="Games" action="games"></h:commandButton>
+	</h:form>
+</h:body>
+</html>
