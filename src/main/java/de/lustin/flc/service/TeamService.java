@@ -22,4 +22,8 @@ public class TeamService {
 		teamsStore.save(t);
 	}
 
+	public Team findById(Long id) {
+		return teamsStore.findById(id);
+	}
+
 }

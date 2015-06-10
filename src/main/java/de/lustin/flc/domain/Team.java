@@ -3,10 +3,13 @@ package de.lustin.flc.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQuery(name = "allTeams", query = "SELECT t FROM Team t")
+@NamedQueries({
+		@NamedQuery(name = "allTeams", query = "SELECT t FROM Team t ORDER BY t.points DESC"),
+		@NamedQuery(name = "findTeamById", query = "SELECT t FROM Team t WHERE t.id = :id") })
 public class Team {
 
 	private String name;
@@ -59,5 +62,30 @@ public class Team {
 
 	public void setId(Long id) {
 		this.id = id;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return "de.lustin.flc.domain.Team[ id=" + id + " ]";
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (id != null ? id.hashCode() : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (!(object instanceof Team)) {
+			return false;
+		}
+		Team other = (Team) object;
+		if ((this.id == null && other.id != null)
+				|| (this.id != null && !this.id.equals(other.id))) {
+			return false;
+		}
+		return true;
+	}
 }
