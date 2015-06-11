@@ -13,7 +13,7 @@ import de.lustin.flc.service.TeamService;
 @RequestScoped
 public class TeamsBean {
 	
-	private Team createdTeam = new Team("",0,0);
+	private Team createdTeam = new Team("");
 
 	@Inject
 	private TeamService teamService;

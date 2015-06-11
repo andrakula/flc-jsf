@@ -15,7 +15,7 @@ public class GameService {
 
 	@Inject
 	private GamesStore gamesStore;
-	
+
 	@Inject
 	private TeamsStore teamsStore;
 
@@ -24,31 +24,44 @@ public class GameService {
 	}
 
 	public void save(Game g) {
-//		gamesStore.save(t);
-		saveUndUpdate(g);
+		calculateGame(g);
+
+		gamesStore.save(g);
+		teamsStore.save(g.getTeam1());
+		teamsStore.save(g.getTeam2());
 	}
-	
-	public void saveUndUpdate(Game game) {
-		Team team1 = game.getTeam1();
-		Team team2 = game.getTeam2();
-		
-		if (game.getGoals1() > game.getGoals2()){
-			team1.setPoints(team1.getPoints()+3);
-		}else if (game.getGoals1() < game.getGoals2()) {
-			team2.setPoints(team2.getPoints()+3);
-		}else{
-			team1.setPoints(team1.getPoints()+1);
-			team2.setPoints(team2.getPoints()+1);
+
+	public void calculateGame(Game game) {
+		Team home = game.getTeam1();
+		Team visitor = game.getTeam2();
+
+		if (game.getGoals1() > game.getGoals2()) {
+			home.setPoints(home.getPoints() + 3);
+			home.setWons(home.getWons() + 1);
+			visitor.setLosts(visitor.getLosts() + 1);
+		} else if (game.getGoals1() < game.getGoals2()) {
+			visitor.setPoints(visitor.getPoints() + 3);
+			visitor.setWons(visitor.getWons() + 1);
+			home.setLosts(home.getLosts() + 1);
+		} else {
+			home.setPoints(home.getPoints() + 1);
+			visitor.setPoints(visitor.getPoints() + 1);
+			home.setDrawns(home.getDrawns() + 1);
+			visitor.setDrawns(visitor.getDrawns() + 1);
 		}
-		
-		
-		team1.setGames(team1.getGames()+1);
-		team2.setGames(team2.getGames()+1);
-		
-		gamesStore.save(game);
-		teamsStore.save(team1);
-		teamsStore.save(team2);
-		
+
+		home.setGoalsFor(home.getGoalsFor() + game.getGoals1());
+		visitor.setGoalsFor(visitor.getGoalsFor() + game.getGoals2());
+
+		home.setGoalsAgainst(home.getGoalsAgainst() + game.getGoals2());
+		visitor.setGoalsAgainst(visitor.getGoalsAgainst() + game.getGoals1());
+
+		home.setGoalsDifference(home.getGoalsFor() - home.getGoalsAgainst());
+		visitor.setGoalsDifference(visitor.getGoalsFor() - visitor.getGoalsAgainst());
+
+		home.setGames(home.getGames() + 1);
+		visitor.setGames(visitor.getGames() + 1);
+
 	}
 
 }

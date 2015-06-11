@@ -27,7 +27,30 @@
 			<f:facet name="header">Games</f:facet>
     				#{t.games}
     			</h:column>
-
+		<h:column>
+			<f:facet name="header">Won</f:facet>
+    				#{t.wons}
+    			</h:column>
+		<h:column>
+			<f:facet name="header">Drawns</f:facet>
+    				#{t.drawns}
+    			</h:column>
+		<h:column>
+			<f:facet name="header">Lost</f:facet>
+    				#{t.losts}
+    			</h:column>
+		<h:column>
+			<f:facet name="header">G</f:facet>
+    				#{t.goalsFor}
+    			</h:column>
+		<h:column>
+			<f:facet name="header"></f:facet>
+    				-
+    			</h:column>
+		<h:column>
+			<f:facet name="header">GA</f:facet>
+    				#{t.goalsAgainst}
+    			</h:column>
 		<h:column>
 			<f:facet name="header">Points</f:facet>
     				#{t.points}
@@ -35,8 +58,7 @@
 
 	</h:dataTable>
 	<h:form>
-		<h:commandButton value="Create Team"
-			action="createTeam"></h:commandButton>
+		<h:commandButton value="Create Team" action="createTeam"></h:commandButton>
 	</h:form>
 </h:body>
 </html>
